@@ -13,6 +13,6 @@ public interface ArticleClient {
     public Future<List<Article>> findAll();
     
     @RestRequestMapping("/{articleId}")
-    public Future<List<Article>> load(@RestPathVariable("articleId") String articleId);
+    public Future<Article> load(@RestPathVariable("articleId") String articleId);
     
 }

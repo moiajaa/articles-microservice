@@ -1,6 +1,5 @@
 package pl.com.agora.article.controller;
 
-import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,12 +30,12 @@ public class ArticleController {
     
     @RequestMapping("/{articleId}")
     @ResponseBody
-    public List<ArticleDTO> get(@PathVariable("articleId") String articleId) {
+    public ArticleDTO get(@PathVariable("articleId") String articleId) {
         ArticleDTO result = repository.load(articleId);
         if (result == null) {
             throw new ArticleNotFoundException(articleId, "Article not found");
         }
-        return Collections.singletonList(result);
+        return result;
     }
     
     @ExceptionHandler(ArticleNotFoundException.class)
