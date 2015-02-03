@@ -5,6 +5,7 @@ import java.util.concurrent.Future;
 
 import pl.com.agora.api.client.rest.bind.annotation.RestPathVariable;
 import pl.com.agora.api.client.rest.bind.annotation.RestRequestMapping;
+import pl.com.agora.api.client.rest.hash.LBHash;
 
 @RestRequestMapping("/article")
 public interface ArticleClient {
@@ -13,6 +14,6 @@ public interface ArticleClient {
     public Future<List<Article>> findAll();
     
     @RestRequestMapping("/{articleId}")
-    public Future<Article> load(@RestPathVariable("articleId") String articleId);
+    public Future<Article> load(@LBHash @RestPathVariable("articleId") String articleId);
     
 }
