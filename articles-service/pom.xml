@@ -26,69 +26,100 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
-		</dependency>		
+		</dependency>
 		<dependency>
 			<groupId>org.hsqldb</groupId>
 			<artifactId>hsqldb</artifactId>
 			<scope>runtime</scope>
 		</dependency>
 
-	    <dependency>
-	        <groupId>org.springframework.boot</groupId>
-	        <artifactId>spring-boot-starter-actuator</artifactId>
-	    </dependency>
-	    
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-	
+
 	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<dependencies>
+					<dependency>
+						<groupId>org.springframework</groupId>
+						<artifactId>springloaded</artifactId>
+						<version>1.2.0.RELEASE</version>
+					</dependency>
+				</dependencies>
 			</plugin>
 		</plugins>
 	</build>
-	
-    <repositories>
-        <repository>
-            <id>central</id>
-            <url>http://maven-repo.gazeta.pl:3080/artifactory/repo</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>snapshots</id>
-            <url>http://maven-repo.gazeta.pl:3080/artifactory/repo</url>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-                <updatePolicy>interval:10</updatePolicy>
-            </snapshots>
-        </repository>
-    </repositories>
 
-    <pluginRepositories>
-        <pluginRepository>
+	<repositories>
+		<repository>
+			<id>central</id>
+			<url>http://maven-repo.gazeta.pl:3080/artifactory/repo</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>snapshots</id>
+			<url>http://maven-repo.gazeta.pl:3080/artifactory/repo</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>interval:10</updatePolicy>
+			</snapshots>
+		</repository>
+	</repositories>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>central</id>
+			<url>http://maven-repo.gazeta.pl:3080/artifactory/plugins-releases</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</pluginRepository>
+		<pluginRepository>
+			<id>snapshots</id>
+			<url>http://maven-repo.gazeta.pl:3080/artifactory/plugins-snapshots</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+		</pluginRepository>
+	</pluginRepositories>
+	
+    <distributionManagement>
+        <!-- use the following if you're NOT using a snapshot version. -->
+        <repository>
+            <uniqueVersion>false</uniqueVersion>
             <id>central</id>
-            <url>http://maven-repo.gazeta.pl:3080/artifactory/plugins-releases</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </pluginRepository>
-        <pluginRepository>
-            <id>snapshots</id>
-            <url>http://maven-repo.gazeta.pl:3080/artifactory/plugins-snapshots</url>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-        </pluginRepository>
-    </pluginRepositories>
+            <name>Internal Maven Proxy</name>
+            <url>http://maven-repo.gazeta.pl:3080/artifactory/libs-releases-local</url>
+            <layout>default</layout>
+        </repository>
+        <!-- use the following if you are using a snapshot version. -->
+        <snapshotRepository>
+            <uniqueVersion>false</uniqueVersion>
+            <id>central</id>
+            <name>Internal Maven Proxy</name>
+            <url>http://maven-repo.gazeta.pl:3080/artifactory/libs-snapshots-local</url>
+            <layout>default</layout>
+        </snapshotRepository>
+        <site>
+            <id>sites</id>
+            <url>file:///exp/maven/sites/${project.name}</url>
+        </site>
+    </distributionManagement>
+    	
 </project>
