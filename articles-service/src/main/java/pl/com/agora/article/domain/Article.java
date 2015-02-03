@@ -14,7 +14,7 @@ public class Article {
     @Column
     private String title;
     
-    @Column(length = 4096)
+    @Column(length = 16384)
     @Lob
     private String content;
     
