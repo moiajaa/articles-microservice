@@ -2,6 +2,8 @@ package pl.com.agora.article.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -19,18 +21,22 @@ import pl.com.agora.article.repo.ArticleRepository;
 @RequestMapping("/article")
 public class ArticleController {
 
+    public static Logger log = LoggerFactory.getLogger(ArticleController.class);
+    
     @Autowired
     private ArticleRepository repository;
 
     @RequestMapping
     @ResponseBody
     public List<ArticleDTO> getAllArticles() {
+        log.debug("Article getAll invoked.");
         return repository.findAll();
     }
     
     @RequestMapping("/{articleId}")
     @ResponseBody
     public ArticleDTO get(@PathVariable("articleId") String articleId) {
+        log.debug("Article get invoked. Article id : {}", articleId);
         ArticleDTO result = repository.load(articleId);
         if (result == null) {
             throw new ArticleNotFoundException(articleId, "Article not found");
