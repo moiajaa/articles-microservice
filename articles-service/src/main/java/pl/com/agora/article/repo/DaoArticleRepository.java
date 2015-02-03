@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import pl.com.agora.article.domain.Article;
 import pl.com.agora.article.dto.ArticleDTO;
 import pl.com.agora.article.repo.jpa.ArticleDAO;
+import pl.com.agora.article.util.ArticleUtil;
 
 @Service
 public class DaoArticleRepository implements ArticleRepository {
@@ -32,14 +33,14 @@ public class DaoArticleRepository implements ArticleRepository {
     
     private List<ArticleDTO> map(DaoCall callback) {
         return StreamSupport.stream(callback.call().spliterator(), false)
-                .map((a) -> new ArticleDTO(a.getId(), a.getTitle(), a.getContent())).collect(Collectors.toList());
+                .map((a) -> new ArticleDTO(a.getId(), a.getTitle(), ArticleUtil.removeSpecialTags(a.getContent()))).collect(Collectors.toList());
     }
 
     private static ArticleDTO map(Article article) {
         if (article == null) {
             return null;
         }
-        return new ArticleDTO(article.getId(), article.getTitle(), article.getContent());
+        return new ArticleDTO(article.getId(), article.getTitle(), ArticleUtil.removeSpecialTags(article.getContent()));
     }
     
     static interface DaoCall {
