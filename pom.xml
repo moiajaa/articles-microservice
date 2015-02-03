@@ -86,5 +86,28 @@
             </releases>
         </pluginRepository>
     </pluginRepositories>
+    
+    <distributionManagement>
+        <!-- use the following if you're NOT using a snapshot version. -->
+        <repository>
+            <uniqueVersion>false</uniqueVersion>
+            <id>central</id>
+            <name>Internal Maven Proxy</name>
+            <url>http://maven-repo.gazeta.pl:3080/artifactory/libs-releases-local</url>
+            <layout>default</layout>
+        </repository>
+        <!-- use the following if you are using a snapshot version. -->
+        <snapshotRepository>
+            <uniqueVersion>false</uniqueVersion>
+            <id>central</id>
+            <name>Internal Maven Proxy</name>
+            <url>http://maven-repo.gazeta.pl:3080/artifactory/libs-snapshots-local</url>
+            <layout>default</layout>
+        </snapshotRepository>
+        <site>
+            <id>sites</id>
+            <url>file:///exp/maven/sites/${project.name}</url>
+        </site>
+    </distributionManagement>    
 	
 </project>
