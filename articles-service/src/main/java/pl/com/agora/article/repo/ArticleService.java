@@ -4,7 +4,7 @@ import java.util.List;
 
 import pl.com.agora.article.dto.ArticleDTO;
 
-public interface ArticleRepository {
+public interface ArticleService {
 
     List<ArticleDTO> findAll();
 

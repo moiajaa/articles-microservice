@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import pl.com.agora.article.dto.ArticleDTO;
 import pl.com.agora.article.dto.ArticleErrorResponse;
-import pl.com.agora.article.repo.ArticleRepository;
+import pl.com.agora.article.repo.ArticleService;
 
 @Controller
 @RequestMapping("/article")
@@ -24,7 +24,7 @@ public class ArticleController {
     public static Logger log = LoggerFactory.getLogger(ArticleController.class);
     
     @Autowired
-    private ArticleRepository repository;
+    private ArticleService repository;
 
     @RequestMapping
     @ResponseBody
